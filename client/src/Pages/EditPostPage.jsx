@@ -34,7 +34,7 @@ const [title,setTitle] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/post/${id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/post/${id}`)
         .then(response => {
             setTitle(response.data.title);
             setSummary(response.data.summary);
@@ -54,7 +54,7 @@ const [title,setTitle] = useState('');
     }
     ev.preventDefault();
 
-    const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/updatepost`, data, {withCredentials: true})
+    const response = await axios.put(`${process.env.REACT_APP_API_URL}/updatepost`, data, {withCredentials: true})
     
     if (response.status >= 200 && response.status < 300) {
       setRedirect(true);

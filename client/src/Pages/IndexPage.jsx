@@ -9,7 +9,7 @@ const IndexPage = () => {
   React.useEffect(() => { 
     setLoading(true)
     axios
-    .get(`${process.env.REACT_APP_API_URL}/api/posts`)
+    .get(`${process.env.REACT_APP_API_URL}/posts`)
     .then((response)=>{
       setPosts(response.data)
       setLoading(false)

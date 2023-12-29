@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate()
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/profile`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/profile`, { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setUserInfo(response.data)
@@ -25,7 +25,7 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`, null, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/logout`, null, {
         withCredentials: true,
       });
 
