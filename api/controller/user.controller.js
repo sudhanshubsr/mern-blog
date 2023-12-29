@@ -4,11 +4,13 @@ import User from "../model/user.model.js";
 import Post from "../model/post.model.js";
 import path from 'path';
 import dotenv from 'dotenv';
+import mongoose from "mongoose";
 
 dotenv.config();
 
 export default class userController {
     static async register(req, res) {
+      mongoose.connect(process.env.MONGO_URI);
     const salt = await bcrypt.genSalt(10);
     const { username, email, password } = req.body;
     try {
@@ -36,6 +38,7 @@ export default class userController {
   }
 
   static async login(req, res) {
+    mongoose.connect(process.env.MONGO_URI);
     const { username, password } = req.body;
     try {
       // CHECK IF USER EXISTS
@@ -77,6 +80,7 @@ export default class userController {
   }
 
   static async profile(req, res) {
+    mongoose.connect(process.env.MONGO_URI);
     try {
       const { jwtToken } = req.cookies;
       if (!jwtToken) {
@@ -96,6 +100,7 @@ export default class userController {
   }
 
   static async logout(req, res) {
+    mongoose.connect(process.env.MONGO_URI);
     try {
       res.cookie("jwtToken", "", { maxAge: 0, httpOnly: true });
       res.status(200).json({ message: "Logged out successfully" });
@@ -107,6 +112,7 @@ export default class userController {
 
 
   static async createpost(req,res,next){
+    mongoose.connect(process.env.MONGO_URI);
 
     const {title,summary,content,author} = req.body;
     let imageurl = req.file.location;
@@ -141,6 +147,7 @@ export default class userController {
 }
 
     static async getposts(req,res){
+      mongoose.connect(process.env.MONGO_URI);
     try{
         const posts = await Post.find()
         .populate('author',['username'])
@@ -154,6 +161,7 @@ export default class userController {
     }
 }
 static async getpostinfo(req,res){
+  mongoose.connect(process.env.MONGO_URI);
     const {id} = req.params;
     try{
         const post = await Post.findById(id)
@@ -168,6 +176,7 @@ static async getpostinfo(req,res){
 }
 
 static async updatepost(req,res){
+  mongoose.connect(process.env.MONGO_URI);
   
     let imagePath;
     if(req.file){
