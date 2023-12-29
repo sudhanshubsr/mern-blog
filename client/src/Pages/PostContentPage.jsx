@@ -15,7 +15,7 @@ const PostContentPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/post/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/post/${id}`)
       .then((response) => {
         setPostInfo(response.data);
       })

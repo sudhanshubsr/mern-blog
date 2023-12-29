@@ -2,12 +2,17 @@ import React from 'react'
 import './post.css'
 import {formatISO9075} from 'date-fns'
 import { Link } from 'react-router-dom'
+
 const Post = ({post}) => {
+ 
   return (
+    
     <div className='post'>
+     
         <div className='image'>
+        
         <Link to={`/post/${post._id}`}>
-        <img src={"http://localhost:3001/"+post.cover} alt="firstimage" />
+        <img src={`${process.env.REACT_APP_API_URL}/`+post.cover} alt="firstimage" />
         </Link>
         </div>
         <div className='texts'>  

@@ -10,8 +10,9 @@ dotenv.config();
 
 const app = express();
 
+const BASE_URL = process.env.BASE_URL;
 
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: BASE_URL}));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/uploads',express.static(path.resolve('uploads')));
@@ -21,7 +22,8 @@ app.use(cookieParser());
 
 app.use('/api', router);
 
-app.listen(3001, ()=>{
-    console.log('Server is listening on port 3001');
+let Port = process.env.PORT || 3001;
+app.listen(Port, ()=>{
+    console.log(`Server is running on port ${Port}`);
 })
 
