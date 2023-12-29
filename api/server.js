@@ -10,7 +10,9 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+const BASE_URL = process.env.BASE_URL;
+
+app.use(cors({credentials: true, origin: BASE_URL}));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/uploads',express.static(path.resolve('uploads')));
