@@ -12,7 +12,7 @@ const app = express();
 
 const BASE_URL = process.env.BASE_URL;
 
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors({credentials: true, origin: "https://pulseofme-frontend.vercel.app"}));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/uploads',express.static(path.resolve('uploads')));
