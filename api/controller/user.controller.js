@@ -208,6 +208,6 @@ static async updatepost(req,res){
         console.log("JWT Verification error", err);
         res.status(401).json({message:"Unauthorized-Invalid JWT"})
     }
-   
+    
     }
     }
