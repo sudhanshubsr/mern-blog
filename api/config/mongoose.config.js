@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-mongoose.connect("mongodb+srv://pulseofmeblog:Ga1hCoskxsjxhPj4@cluster0.dnyzshb.mongodb.net/pulseofmeblog?retryWrites=true&w=majority");
-
+dotenv.config();
+const MongoURI = process.env.MONGO_URI
+mongoose.connect(MongoURI);
 
 const db = mongoose.connection;
 db.on('error',console.error.bind(console, 'Error Connecting to DB'));

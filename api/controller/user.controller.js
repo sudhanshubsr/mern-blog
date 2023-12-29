@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
 import Post from "../model/post.model.js";
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
+
 export default class userController {
   static async register(req, res) {
     const salt = await bcrypt.genSalt(10);
