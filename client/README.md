@@ -18,4 +18,12 @@
     - Cookies
     - URL parameter
 
-```
+
+### How to Set up a S3 Bucket for File Uploads
+- Create a new bucket
+- Set the permissions to public
+- Don't change anything and create bucket
+- Now create a new user and give it full access to S3 bucket which we created
+- Assign a the user a new policy and select S3 bucket policy
+- Now copy the ARN of the bucket and paste it in the bucket policy
+- yarn add @aws-sdk/client-s3

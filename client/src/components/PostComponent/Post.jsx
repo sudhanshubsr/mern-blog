@@ -12,7 +12,7 @@ const Post = ({post}) => {
         <div className='image'>
         
         <Link to={`/post/${post._id}`}>
-        <img src={`${process.env.REACT_APP_API_URL}/`+post.cover} alt="firstimage" />
+        <img src={post.cover} alt="firstimage" />
         </Link>
         </div>
         <div className='texts'>  

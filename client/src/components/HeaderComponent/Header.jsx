@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom'
 
 const Header = () => {
   const { userInfo, setUserInfo } = useGlobalState()
+  
   const navigate = useNavigate()
   useEffect(() => {
     axios
@@ -46,7 +47,6 @@ const Header = () => {
       <Link to="/" className="logo">
         PulseOfMe 
       </Link>
-
       {username && (
         <nav>
           <Link to="/create">Create New Post</Link>

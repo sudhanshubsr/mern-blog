@@ -4,10 +4,11 @@ import User from "../model/user.model.js";
 import Post from "../model/post.model.js";
 import path from 'path';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 export default class userController {
-  static async register(req, res) {
+    static async register(req, res) {
     const salt = await bcrypt.genSalt(10);
     const { username, email, password } = req.body;
     try {
@@ -105,12 +106,10 @@ export default class userController {
   }
 
 
-  static async createpost(req,res){
+  static async createpost(req,res,next){
 
     const {title,summary,content,author} = req.body;
-    const imagePath = 'uploads/'+req.file.filename;
-    // console.log(imagePath)
-    // console.log(path.resolve())
+    let imageurl = req.file.location;
     const {jwtToken} = req.cookies;
     if(!jwtToken){
         return res.status(401).json({message:"Unauthorized"})
@@ -121,13 +120,13 @@ export default class userController {
                 console.log("JWT Verification error", err);
                 return res.status(401).json({message:"Unauthorized-Invalid JWT"})
             }
-            const {username, id} = decodedToken;
+            const {username,id} = decodedToken;
             const newPost = Post.create({
                 title,
                 summary,
                 content,
                 author: id,
-                cover: imagePath,
+                cover: imageurl,
             })
         res.status(200).json({message:"Post created successfully"})
         })
@@ -172,7 +171,7 @@ static async updatepost(req,res){
   
     let imagePath;
     if(req.file){
-        imagePath = 'uploads/'+req.file.filename;
+        imagePath = req.file.location;
     }
     const {jwtToken} = req.cookies;
     if(!jwtToken){
