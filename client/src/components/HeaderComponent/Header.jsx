@@ -5,14 +5,15 @@ import { useGlobalState } from '../../context/user.context'
 import  { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
-
+const baseapiurl = process.env.REACT_APP_API_URL
+console.log(baseapiurl)
 const Header = () => {
   const { userInfo, setUserInfo } = useGlobalState()
   
   const navigate = useNavigate()
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/profile`, { withCredentials: true })
+      .get(`${baseapiurl}/profile`, { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setUserInfo(response.data)

@@ -25,6 +25,9 @@ app.get('/', (req, res)=>{
 
 app.use('/', router);
 
+app.get('/test', (req, res)=>{
+    res.send('Hello World');
+})
 let Port = process.env.PORT || 3001;
 app.listen(Port, ()=>{
     console.log(`Server is running on port ${Port}`);
