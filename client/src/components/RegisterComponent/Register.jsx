@@ -18,7 +18,7 @@ const Register = () => {
       password
     })
 
-    if(response.status === 200){
+    if(response.status >= 200 && response.status < 300){
       alert("Registration successful")
       setRedirect(true)
     }
@@ -28,7 +28,7 @@ const Register = () => {
   }
 
   if(redirect){
-    <Navigate to="/login" />
+    return <Navigate to="/login" />
   }
   
   return (

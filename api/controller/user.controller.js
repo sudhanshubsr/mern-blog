@@ -10,7 +10,7 @@ dotenv.config();
 
 export default class userController {
     static async register(req, res) {
-      mongoose.connect(process.env.MONGO_URI);
+    mongoose.connect(process.env.MONGO_URI);
     const salt = await bcrypt.genSalt(10);
     const { username, email, password } = req.body;
     try {
@@ -29,7 +29,7 @@ export default class userController {
         email,
         password: await bcrypt.hash(password, salt),
       });
-      res.json(newUser);
+      res.status(200).json({message:"User created successfully"});
       console.log("User created successfully");
     } catch (err) {
       console.log(err);
