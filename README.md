@@ -41,9 +41,19 @@ Before you begin, ensure you have the following prerequisites installed:
    ### Add Enviornment Varaibles
    - Create a new .env file inside api root directory and add the below enviornment variables
      ```bash
+        JWT_SECRET="your_jwt_secret"
+        MONGO_URI="your_mongo_uri"
+        BASE_URL="your_base_url"
+        PORT=your_port
+        S3_BUCKET_NAME="your_s3_bucket_name"
+        AWS_ACCESS_KEY_ID="your_aws_access_key_id"
+        AWS_SECRET_ACCESS_KEY="your_aws_secret_access_key"
+        AWS_REGION="your_aws_region"
+
      ```
    - Create a new .env file inside client root directory and add the below enviornment variables
    - ```bash
+         REACT_APP_API_URL="http://localhost:3001/api"
      ```
 
 
