@@ -1,12 +1,14 @@
 import React from 'react'
 import {useState} from 'react'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 import './register.css'
 const Register = () => {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,12 +20,17 @@ const Register = () => {
 
     if(response.status === 200){
       alert("Registration successful")
+      setRedirect(true)
     }
     else{
       alert("Registration failed")
     }
   }
 
+  if(redirect){
+    <Navigate to="/login" />
+  }
+  
   return (
     <div className="register-container">
       <h2 className="register-header">Register</h2>
