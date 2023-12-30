@@ -21,6 +21,16 @@ Before you begin, ensure you have the following prerequisites installed:
 - Node.js: [https://nodejs.org/](https://nodejs.org/)
 - MongoDB: [https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)
 
+## Folder Structure
+```bash
+    mern-blog/
+├── client/                  # Frontend code (React)
+├── api/                     # Backend code (Express.js)
+├── vercel.json              # Vercel Configuration File
+
+```
+   
+
 ### Installation
 
 1. Clone the repository:
@@ -75,14 +85,6 @@ Before you begin, ensure you have the following prerequisites installed:
 - Mongoose: MongoDB object modeling for Node.js
 
 
-## Folder Structure
-```bash
-    mern-blog/
-├── client/                  # Frontend code (React)
-├── api/                     # Backend code (Express.js)
-├── vercel.json              # Vercel Configuration File
 
-```
-   
   
    
