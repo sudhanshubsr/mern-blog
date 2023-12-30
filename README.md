@@ -1,3 +1,6 @@
+## Warning! It's a little bit slow (working to improve performance)
+
+
 # MERN Stack Blog App (PulseOfMe)
 
 Welcome to the MERN Stack Blog App! This is a full-stack web application built using the MERN (MongoDB, Express.js, React, Node.js) stack. This application allows users to create, read, update, and delete blog posts.
