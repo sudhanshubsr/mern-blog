@@ -17,12 +17,13 @@ const LoginPage = () => {
               username,
               password
           }, { withCredentials: true });
-  
+
           // Check if the response status is in the 2xx range for success
           if (response.status >= 200 && response.status < 300) {
+              console.log(response.data)
               setUserInfo(response.data)
               setRedirect(true)
-              
+
           } else {
               alert("Login Failed");
           }
@@ -32,7 +33,7 @@ const LoginPage = () => {
           alert("Login Failed");
       }
   };
-  
+
 
     if(redirect){
       return <Navigate to={'/'}/>
