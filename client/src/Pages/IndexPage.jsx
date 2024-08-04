@@ -6,7 +6,7 @@ const IndexPage = () => {
   const [posts, setPosts] = React.useState([])
   const [loading, setLoading] = React.useState(false)
 
-  React.useEffect(() => { 
+  React.useEffect(() => {
     setLoading(true)
     axios
     .get(`${process.env.REACT_APP_API_URL}/posts`)
@@ -19,7 +19,7 @@ const IndexPage = () => {
   return (
     <>
         {loading && <h1>Loading...</h1>}
-        {!loading && 
+        {!loading &&
         <>
           {posts.length > 0 && posts.map((post) => {
             return <Post key={post._id} post={post} />
@@ -28,7 +28,7 @@ const IndexPage = () => {
         </>
         }
     </>
-    
+
   )
 }
 

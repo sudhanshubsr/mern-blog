@@ -35,7 +35,7 @@ export default function CreatePost() {
     data.set('file', files[0]);
     ev.preventDefault();
     console.log(files)
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/createpost`, data, {withCredentials: true})
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/post/createPost`, data, {withCredentials: true})
 
     if (response.status >= 200 && response.status < 300) {
       setRedirect(true);

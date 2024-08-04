@@ -1,45 +1,44 @@
-import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import db from './config/mongoose.config.js';
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
 import path from 'path';
-import userController from './controller/user.controller.js';
-import uploadFile from './middlewares/multerS3.middleware.js';
+import db from './src/config/mongoose.config.js';
+
+import authRouter from './src/routes/auth.routes.js';
+import postRouter from './src/routes/post.routes.js';
+import userRouter from './src/routes/user.routes.js';
 
 dotenv.config();
 
-
 const app = express();
 
-
-
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
-app.use(express.urlencoded({extended: true}));
-
-app.use('/uploads',express.static(path.resolve('uploads')));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.resolve('uploads')));
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.post('/api/register', userController.register);
-app.post('/api/login', userController.login);
-app.get('/api/profile', userController.profile);
-app.post('/api/logout', userController.logout);
-app.post('/api/createpost',uploadFile.single('file'), userController.createpost);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
 
-app.get('/api/posts', userController.getposts);
-app.get('/api/post/:id', userController.getpostinfo);
-app.put('/api/post/:id', userController.updatepost);
-app.put('/api/updatepost', uploadFile.single('file'),userController.updatepost);
-
-
-
-app.get('/test', (req, res)=>{
-    res.send('Hello World');
-})
+app.get('/test', (req, res) => {
+  res.send('Welcome');
+});
 
 let Port = process.env.PORT || 3001;
-app.listen(Port, ()=>{
-    console.log(`Server is running on port ${Port}`);
-})
-
+app.listen(Port, () => {
+  console.log(`Server is running on port ${Port}`);
+});

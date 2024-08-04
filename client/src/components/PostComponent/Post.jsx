@@ -4,18 +4,18 @@ import {formatISO9075} from 'date-fns'
 import { Link } from 'react-router-dom'
 
 const Post = ({post}) => {
- 
+
   return (
-    
+
     <div className='post'>
-     
+
         <div className='image'>
-        
+
         <Link to={`/post/${post._id}`}>
         <img src={post.cover} alt="firstimage" />
         </Link>
         </div>
-        <div className='texts'>  
+        <div className='texts'>
         <Link to={`/post/${post._id}`}>
         <h2>{post.title}</h2>
         </Link>

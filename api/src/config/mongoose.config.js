@@ -12,5 +12,4 @@ db.once('open',()=>{
     console.log('Connected to DB');
 })
 
-
-export default db;  
+export default db;

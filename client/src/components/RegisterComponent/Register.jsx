@@ -1,58 +1,76 @@
-import React from 'react'
-import {useState} from 'react'
-import axios from 'axios'
-import { Navigate } from 'react-router-dom'
-import './register.css'
+import axios from 'axios';
+import React, { useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Navigate } from 'react-router-dom';
+import './register.css';
+
 const Register = () => {
+  const initialState = {
+    username: '',
+    email: '',
+    password: '',
+  };
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [user, setUser] = useState(initialState);
+  const usernameRef = useRef(null);
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/register`,{
-      username,
-      email,
-      password
-    })
+  const handleChange = (ev) => {
+    const { name, value } = ev.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    if(response.status >= 200 && response.status < 300){
-      alert("Registration successful")
-      setRedirect(true)
+  const handleRegister = async (ev) => {
+    ev.preventDefault();
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/register`,
+        { user }
+      );
+      toast.success(response.data.message || 'Registration successful');
+      console.log(response);
+      if (response.status === 201) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || 'Registration Failed');
+      setUser(initialState);
+      usernameRef.current.focus();
     }
-    else{
-      alert("Registration failed")
-    }
+  };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
   }
 
-  if(redirect){
-    return <Navigate to="/login" />
-  }
-  
   return (
     <div className="register-container">
       <h2 className="register-header">Register</h2>
-      <form  onSubmit={handleRegister} className="register-form">
+      <form onSubmit={handleRegister} className="register-form">
         <label className="register-label">
           Username:
           <input
             type="text"
-            name='username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            ref={usernameRef}
+            name="username"
+            value={user.username}
+            onChange={handleChange}
             required
             className="register-input"
+            autoFocus
           />
         </label>
         <label className="register-label">
           Email:
           <input
             type="email"
-            name='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={user.email}
+            onChange={handleChange}
             required
             className="register-input"
           />
@@ -61,9 +79,9 @@ const Register = () => {
           Password:
           <input
             type="password"
-            name='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={user.password}
+            onChange={handleChange}
             required
             className="register-input"
           />
@@ -73,7 +91,7 @@ const Register = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
